@@ -1,5 +1,7 @@
 package edu.guilford;
 
+import java.util.Random;
+
 public class Rational {
     //Define 2 integer attributes, numerator and denominator
     private int numerator;
@@ -7,12 +9,15 @@ public class Rational {
 
     //Define a constructor that takes no arguments and sets the numerator to 0 and the denominator to 1
     public Rational() {
-        numerator = 0;
-        denominator = 1;
-    }
-
-    //Define a constructor that generates a Rational number with random values for the numerator and denominator in the range [-100, 100]
-    
+        Random rand = new Random();
+        //Set the numerator and denominator to be between -100 and 100
+        numerator = rand.nextInt(201) - 100;
+        denominator = rand.nextInt(201) - 100;
+        //Add code that if denominator is zero have the constructor select a new random number for the denominator
+        while (denominator == 0) {
+            denominator = rand.nextInt(201) - 100;
+        }
+    }    
 
     //Add a toString method that displays a Rational object in a reasonable format
     public String toString() {
@@ -41,12 +46,13 @@ public class Rational {
         denominator = temp;
     }
 
-    //Add a method called toDouble that returns the value of a Rational object as a double
+    //Add a method called toDouble that converts the rational number to a double and returns the result
     public double toDouble() {
         return (double) numerator / denominator;
     }
 
-    //Write a method that takes a Rational number as an argument, adds it to the rational number represented by the current object, and returns the result as a new Rational object
+    //Write a method called add that takes a Rational number as an argument, adds it to the rational number 
+    //represented by the current object, and returns the result as a new Rational object
     public Rational add(Rational r) {
         int n = numerator * r.denominator + r.numerator * denominator;
         int d = denominator * r.denominator;
